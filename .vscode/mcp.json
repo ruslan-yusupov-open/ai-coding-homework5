@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "homework5-docs": {
+      "type": "stdio",
+      "command": "uv",
+      "args": ["run", "--frozen", "--directory", "${workspaceFolder}", "python", "server.py"],
+      "env": {"MCP_LOG_FILE": "logs/copilot.jsonl", "PYTHONUTF8": "1"}
+    }
+  }
+}

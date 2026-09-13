@@ -1,0 +1,8 @@
+{"timestamp": "2026-09-13T19:06:51.615731+00:00", "call_id": "473932d9-9cbb-414f-94f4-b408646c465e", "tool": "list_docs", "params": {}, "status": "success", "error_code": null}
+{"timestamp": "2026-09-13T19:06:51.623392+00:00", "call_id": "c8bf8047-3928-440f-b475-8a02c06f622b", "tool": "search_docs", "params": {"query": "stdio"}, "status": "success", "error_code": null}
+{"timestamp": "2026-09-13T19:06:51.628996+00:00", "call_id": "70821235-b8c8-4952-9060-f6a6f487a4a2", "tool": "get_doc", "params": {"path": "security.md"}, "status": "success", "error_code": null}
+{"timestamp": "2026-09-13T19:06:51.635552+00:00", "call_id": "8f86da78-65a5-49cc-b817-5263b101698c", "tool": "search_docs", "params": {"query": "zzz_no_such_term"}, "status": "success", "error_code": null}
+{"timestamp": "2026-09-13T19:06:51.641568+00:00", "call_id": "948ad3e5-8bf1-4255-b73c-8f823f5de52d", "tool": "get_doc", "params": {"path": "../README.md"}, "status": "error", "error_code": "ACCESS_DENIED"}
+{"timestamp": "2026-09-13T19:06:51.644383+00:00", "call_id": "bd7173ee-f7cf-44a3-8bf9-d0061fbf7ed9", "tool": "search_docs", "params": {"query": ""}, "status": "error", "error_code": "INVALID_PARAMS"}
+{"timestamp": "2026-09-13T19:06:51.647613+00:00", "call_id": "a8f95b2e-fae6-4e06-a364-779df735409e", "tool": "get_doc", "params": {"path": "absent.md"}, "status": "error", "error_code": "NOT_FOUND"}
+{"timestamp": "2026-09-13T19:06:51.650580+00:00", "call_id": "b1b1b66c-83b5-4717-985d-0a0e9c32daad", "tool": "list_docs", "params": {"extra": "[REDACTED]"}, "status": "error", "error_code": "INVALID_PARAMS"}

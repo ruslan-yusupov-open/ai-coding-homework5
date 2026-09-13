@@ -1,0 +1,137 @@
+{
+  "url": "https://mcp1.leadcm.com/mcp",
+  "timestamp": "2026-09-13T20:17:15.175303+00:00",
+  "expires_at": 1791922413,
+  "checks": [
+    {
+      "name": "no credential",
+      "http_status": 401
+    },
+    {
+      "name": "wrong credential",
+      "http_status": 401
+    },
+    {
+      "name": "untrusted origin",
+      "http_status": 403
+    },
+    {
+      "name": "oversized body",
+      "http_status": 413
+    },
+    {
+      "name": "no query credentials",
+      "http_status": 400
+    }
+  ],
+  "calls": [
+    {
+      "tool": "list_docs",
+      "params": {},
+      "result": {
+        "status": "success",
+        "call_id": "ebe67cd4-2134-4fed-914e-bca077ebf20f",
+        "data": {
+          "documents": [
+            {
+              "path": "overview.md",
+              "title": "Local Docs MCP",
+              "lines": 16
+            },
+            {
+              "path": "security.md",
+              "title": "Безопасность",
+              "lines": 20
+            },
+            {
+              "path": "troubleshooting.md",
+              "title": "Отладка подключения",
+              "lines": 20
+            }
+          ],
+          "count": 3
+        },
+        "error": null
+      }
+    },
+    {
+      "tool": "search_docs",
+      "params": {
+        "query": "stdio"
+      },
+      "result": {
+        "status": "success",
+        "call_id": "4f093cc7-3f74-496a-b52c-53a1b0fe931a",
+        "data": {
+          "matches": [
+            {
+              "path": "overview.md",
+              "line": 16,
+              "snippet": "Транспорт stdio: IDE запускает процесс и обменивается с ним сообщениями MCP."
+            }
+          ],
+          "count": 1,
+          "truncated": false
+        },
+        "error": null
+      }
+    },
+    {
+      "tool": "get_doc",
+      "params": {
+        "path": "security.md"
+      },
+      "result": {
+        "status": "success",
+        "call_id": "3b1e6622-e92f-45d9-ad7e-5cecd5dcbdc9",
+        "data": {
+          "path": "security.md",
+          "content": "# Безопасность\n\n## Граница доступа\n\nСервер читает только обычные файлы .md внутри папки knowledge рядом с server.py.\nАбсолютные пути, .., скрытые компоненты, символические ссылки и junction запрещены.\nКоманды оболочки не выполняются, файлы инструментами не изменяются.\nПапка knowledge предназначена для публичной документации: секреты туда не помещают.\n\n## Ограничения\n\nРазмер документа — максимум 128 КиБ. Не более 200 документов и 1000 элементов дерева.\nПоиск возвращает максимум 20 совпадений; один фрагмент — максимум 300 символов.\nЗапрос поиска — от 1 до 200 символов. Это буквальная подстрока, не регулярное выражение.\n\n## Логи\n\nКаждый вызов содержит call_id, имя инструмента, параметры и статус success/error.\nЛоги пишутся в stderr и logs/*.jsonl; stdout занят протоколом MCP.\nЗначения похожих на секреты строк в параметрах заменяются на [REDACTED].\n",
+          "lines": 20
+        },
+        "error": null
+      }
+    },
+    {
+      "tool": "search_docs",
+      "params": {
+        "query": "zzz_no_such_term"
+      },
+      "result": {
+        "status": "success",
+        "call_id": "dcde64d0-953c-4058-9430-92b178ab78c6",
+        "data": {
+          "matches": [],
+          "count": 0,
+          "truncated": false
+        },
+        "error": null
+      }
+    },
+    {
+      "tool": "get_doc",
+      "params": {
+        "path": "../README.md"
+      },
+      "result": {
+        "status": "error",
+        "call_id": "0e768af3-0319-416f-8c47-958208c2911d",
+        "data": null,
+        "error": {
+          "code": "ACCESS_DENIED",
+          "message": "Use a relative Markdown path inside knowledge."
+        }
+      }
+    }
+  ],
+  "serverInfo": {
+    "name": "homework5-docs",
+    "version": "0.1.0"
+  },
+  "tools": [
+    "list_docs",
+    "search_docs",
+    "get_doc"
+  ],
+  "publication_note": "Unrelated website check omitted; MCP requests and results unchanged."
+}

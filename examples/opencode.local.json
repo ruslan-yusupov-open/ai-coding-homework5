@@ -1,0 +1,15 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "homework5-docs": {
+      "type": "local",
+      "command": ["uv", "run", "--frozen", "python", "server.py"],
+      "enabled": true,
+      "environment": {
+        "MCP_LOG_FILE": "logs/opencode.jsonl",
+        "PYTHONUTF8": "1"
+      },
+      "timeout": 15000
+    }
+  }
+}

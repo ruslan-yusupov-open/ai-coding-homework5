@@ -1,0 +1,482 @@
+{
+  "source": "automated MCP SDK client (not IDE)",
+  "timestamp": "2026-09-13T19:06:51.039469+00:00",
+  "checks": [
+    {
+      "prompt": "Покажи список документов через list_docs.",
+      "tool": "list_docs",
+      "arguments": {},
+      "result": {
+        "status": "success",
+        "call_id": "473932d9-9cbb-414f-94f4-b408646c465e",
+        "data": {
+          "documents": [
+            {
+              "path": "overview.md",
+              "title": "Local Docs MCP",
+              "lines": 16
+            },
+            {
+              "path": "security.md",
+              "title": "Безопасность",
+              "lines": 20
+            },
+            {
+              "path": "troubleshooting.md",
+              "title": "Отладка подключения",
+              "lines": 20
+            }
+          ],
+          "count": 3
+        },
+        "error": null
+      },
+      "passed": true
+    },
+    {
+      "prompt": "Найди stdio в документации через search_docs.",
+      "tool": "search_docs",
+      "arguments": {
+        "query": "stdio"
+      },
+      "result": {
+        "status": "success",
+        "call_id": "c8bf8047-3928-440f-b475-8a02c06f622b",
+        "data": {
+          "matches": [
+            {
+              "path": "overview.md",
+              "line": 16,
+              "snippet": "Транспорт stdio: IDE запускает процесс и обменивается с ним сообщениями MCP."
+            }
+          ],
+          "count": 1,
+          "truncated": false
+        },
+        "error": null
+      },
+      "passed": true
+    },
+    {
+      "prompt": "Прочитай security.md через get_doc.",
+      "tool": "get_doc",
+      "arguments": {
+        "path": "security.md"
+      },
+      "result": {
+        "status": "success",
+        "call_id": "70821235-b8c8-4952-9060-f6a6f487a4a2",
+        "data": {
+          "path": "security.md",
+          "content": "# Безопасность\n\n## Граница доступа\n\nСервер читает только обычные файлы .md внутри папки knowledge рядом с server.py.\nАбсолютные пути, .., скрытые компоненты, символические ссылки и junction запрещены.\nКоманды оболочки не выполняются, файлы инструментами не изменяются.\nПапка knowledge предназначена для публичной документации: секреты туда не помещают.\n\n## Ограничения\n\nРазмер документа — максимум 128 КиБ. Не более 200 документов и 1000 элементов дерева.\nПоиск возвращает максимум 20 совпадений; один фрагмент — максимум 300 символов.\nЗапрос поиска — от 1 до 200 символов. Это буквальная подстрока, не регулярное выражение.\n\n## Логи\n\nКаждый вызов содержит call_id, имя инструмента, параметры и статус success/error.\nЛоги пишутся в stderr и logs/*.jsonl; stdout занят протоколом MCP.\nЗначения похожих на секреты строк в параметрах заменяются на [REDACTED].\n",
+          "lines": 20
+        },
+        "error": null
+      },
+      "passed": true
+    },
+    {
+      "prompt": "Найди несуществующий термин zzz_no_such_term.",
+      "tool": "search_docs",
+      "arguments": {
+        "query": "zzz_no_such_term"
+      },
+      "result": {
+        "status": "success",
+        "call_id": "8f86da78-65a5-49cc-b817-5263b101698c",
+        "data": {
+          "matches": [],
+          "count": 0,
+          "truncated": false
+        },
+        "error": null
+      },
+      "passed": true
+    },
+    {
+      "prompt": "Попробуй прочитать ../README.md через get_doc.",
+      "tool": "get_doc",
+      "arguments": {
+        "path": "../README.md"
+      },
+      "result": {
+        "status": "error",
+        "call_id": "948ad3e5-8bf1-4255-b73c-8f823f5de52d",
+        "data": null,
+        "error": {
+          "code": "ACCESS_DENIED",
+          "message": "Use a relative Markdown path inside knowledge."
+        }
+      },
+      "passed": true
+    },
+    {
+      "prompt": "Проверь пустой запрос.",
+      "tool": "search_docs",
+      "arguments": {
+        "query": ""
+      },
+      "result": {
+        "status": "error",
+        "call_id": "bd7173ee-f7cf-44a3-8bf9-d0061fbf7ed9",
+        "data": null,
+        "error": {
+          "code": "INVALID_PARAMS",
+          "message": "Arguments do not match the tool input schema."
+        }
+      },
+      "passed": true
+    },
+    {
+      "prompt": "Проверь отсутствующий документ.",
+      "tool": "get_doc",
+      "arguments": {
+        "path": "absent.md"
+      },
+      "result": {
+        "status": "error",
+        "call_id": "a8f95b2e-fae6-4e06-a364-779df735409e",
+        "data": null,
+        "error": {
+          "code": "NOT_FOUND",
+          "message": "Document or knowledge directory does not exist."
+        }
+      },
+      "passed": true
+    },
+    {
+      "prompt": "Проверь лишние параметры.",
+      "tool": "list_docs",
+      "arguments": {
+        "extra": true
+      },
+      "result": {
+        "status": "error",
+        "call_id": "b1b1b66c-83b5-4717-985d-0a0e9c32daad",
+        "data": null,
+        "error": {
+          "code": "INVALID_PARAMS",
+          "message": "Arguments do not match the tool input schema."
+        }
+      },
+      "passed": true
+    }
+  ],
+  "server": {
+    "meta": null,
+    "protocolVersion": "2025-11-25",
+    "capabilities": {
+      "experimental": {},
+      "logging": null,
+      "prompts": null,
+      "resources": null,
+      "tools": {
+        "listChanged": false
+      },
+      "completions": null,
+      "tasks": null
+    },
+    "serverInfo": {
+      "name": "homework5-docs",
+      "title": null,
+      "version": "0.1.0",
+      "websiteUrl": null,
+      "icons": null
+    },
+    "instructions": null
+  },
+  "tools": [
+    {
+      "name": "list_docs",
+      "title": null,
+      "description": "List local Markdown documents and titles in knowledge.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "ListParams",
+        "type": "object"
+      },
+      "outputSchema": {
+        "$defs": {
+          "ErrorInfo": {
+            "properties": {
+              "code": {
+                "title": "Code",
+                "type": "string"
+              },
+              "message": {
+                "title": "Message",
+                "type": "string"
+              }
+            },
+            "required": [
+              "code",
+              "message"
+            ],
+            "title": "ErrorInfo",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "status": {
+            "enum": [
+              "success",
+              "error"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "call_id": {
+            "title": "Call Id",
+            "type": "string"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Data"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/ErrorInfo"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "status",
+          "call_id"
+        ],
+        "title": "Output",
+        "type": "object"
+      },
+      "icons": null,
+      "annotations": {
+        "title": null,
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "meta": null,
+      "execution": null
+    },
+    {
+      "name": "search_docs",
+      "title": null,
+      "description": "Search local documentation by literal substring; return paths, line numbers and excerpts. Use for questions about setup or security.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "description": "Literal substring, case-insensitive; no secrets.",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Query",
+            "type": "string"
+          },
+          "limit": {
+            "default": 10,
+            "description": "Maximum number of matching lines.",
+            "maximum": 20,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "SearchParams",
+        "type": "object"
+      },
+      "outputSchema": {
+        "$defs": {
+          "ErrorInfo": {
+            "properties": {
+              "code": {
+                "title": "Code",
+                "type": "string"
+              },
+              "message": {
+                "title": "Message",
+                "type": "string"
+              }
+            },
+            "required": [
+              "code",
+              "message"
+            ],
+            "title": "ErrorInfo",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "status": {
+            "enum": [
+              "success",
+              "error"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "call_id": {
+            "title": "Call Id",
+            "type": "string"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Data"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/ErrorInfo"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "status",
+          "call_id"
+        ],
+        "title": "Output",
+        "type": "object"
+      },
+      "icons": null,
+      "annotations": {
+        "title": null,
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "meta": null,
+      "execution": null
+    },
+    {
+      "name": "get_doc",
+      "title": null,
+      "description": "Read a complete local Markdown document using its relative path. Use after list_docs or search_docs. Cannot read files outside knowledge.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "description": "Relative .md path from list_docs, for example security.md.",
+            "maxLength": 240,
+            "minLength": 1,
+            "title": "Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "title": "GetParams",
+        "type": "object"
+      },
+      "outputSchema": {
+        "$defs": {
+          "ErrorInfo": {
+            "properties": {
+              "code": {
+                "title": "Code",
+                "type": "string"
+              },
+              "message": {
+                "title": "Message",
+                "type": "string"
+              }
+            },
+            "required": [
+              "code",
+              "message"
+            ],
+            "title": "ErrorInfo",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "status": {
+            "enum": [
+              "success",
+              "error"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "call_id": {
+            "title": "Call Id",
+            "type": "string"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Data"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/ErrorInfo"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "status",
+          "call_id"
+        ],
+        "title": "Output",
+        "type": "object"
+      },
+      "icons": null,
+      "annotations": {
+        "title": null,
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "meta": null,
+      "execution": null
+    }
+  ]
+}

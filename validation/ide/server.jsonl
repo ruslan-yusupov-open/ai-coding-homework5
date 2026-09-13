@@ -1,0 +1,5 @@
+{"timestamp": "2026-09-13T19:58:16.930906+00:00", "call_id": "170e95cf-5e23-4ee2-b88c-9a677cf2684d", "tool": "list_docs", "params": {}, "status": "success", "error_code": null}
+{"timestamp": "2026-09-13T20:00:38.551588+00:00", "call_id": "595e7955-08d6-47cf-83cf-b328ce937703", "tool": "search_docs", "params": {"query": "stdio"}, "status": "success", "error_code": null}
+{"timestamp": "2026-09-13T20:01:08.903538+00:00", "call_id": "61a319d8-ee5b-4fbc-b815-7b2d49f793cf", "tool": "get_doc", "params": {"path": "security.md"}, "status": "success", "error_code": null}
+{"timestamp": "2026-09-13T20:01:16.502028+00:00", "call_id": "859b604d-a2ba-4b9d-b6ec-a34a89442826", "tool": "search_docs", "params": {"query": "zzz_no_such_term"}, "status": "success", "error_code": null}
+{"timestamp": "2026-09-13T20:01:20.471733+00:00", "call_id": "259f04a3-e8b9-499a-a68a-0474b388d39c", "tool": "get_doc", "params": {"path": "../README.md"}, "status": "error", "error_code": "ACCESS_DENIED"}

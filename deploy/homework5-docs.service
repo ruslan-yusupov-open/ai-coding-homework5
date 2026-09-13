@@ -1,0 +1,51 @@
+[Unit]
+Description=Read-only documentation MCP with expiring authentication
+Requires=homework5-docs.socket
+After=homework5-docs.socket
+
+[Service]
+User=homework5-docs
+Group=homework5-docs
+RootDirectory=/var/lib/homework5-docs-root
+MountAPIVFS=yes
+WorkingDirectory=/opt/homework5-docs
+ExecStart=/opt/homework5-docs/.venv/bin/python -m uvicorn http_server:production_app --factory --fd 3 --workers 1 --no-access-log --no-proxy-headers --limit-concurrency 8 --timeout-keep-alive 5
+Sockets=homework5-docs.socket
+Environment=MCP_AUTH_FILE=/etc/homework5-docs-auth.json
+Environment=PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 PYTHONIOENCODING=utf-8
+BindReadOnlyPaths=/usr/lib /usr/lib64 /usr/bin/python3.12 /opt/homework5-docs /etc/homework5-docs-auth.json
+BindPaths=/var/log/homework5-docs:/opt/homework5-docs/logs
+ReadWritePaths=/opt/homework5-docs/logs
+TemporaryFileSystem=/tmp:rw,nosuid,nodev,noexec,size=16M
+PrivateNetwork=yes
+PrivateDevices=yes
+ProtectProc=invisible
+ProtectHome=yes
+ProtectSystem=strict
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+RestrictSUIDSGID=yes
+RestrictRealtime=yes
+RestrictNamespaces=yes
+LockPersonality=yes
+SystemCallArchitectures=native
+SystemCallFilter=~@mount @reboot @swap @raw-io @privileged
+RestrictAddressFamilies=AF_UNIX
+CPUQuota=50%
+MemoryMax=256M
+MemorySwapMax=0
+TasksMax=32
+LimitNOFILE=128
+LimitFSIZE=8M
+UMask=0077
+KillMode=control-group
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

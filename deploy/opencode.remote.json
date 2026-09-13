@@ -1,0 +1,15 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "homework5-live": {
+      "type": "remote",
+      "url": "https://mcp1.leadcm.com/mcp",
+      "oauth": false,
+      "headers": {
+        "Authorization": "Bearer {env:HOMEWORK5_MCP_TOKEN}"
+      },
+      "enabled": true,
+      "timeout": 15000
+    }
+  }
+}

@@ -1,0 +1,17 @@
+Publication copy: local absolute paths replaced with <fresh-workspace>; test results unchanged.
+Fresh source copy, new .venv; dependencies installed from uv.lock using local cache.
+Commands: uv run --frozen --offline pytest -q --basetemp .pytest-tmp; uv run --frozen --offline python validate.py
+
+..........s.......                                                       [100%]
+============================== warnings summary ===============================
+tests\test_http.py:5
+  <fresh-workspace>\tests\test_http.py:5: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient
+
+.venv\Lib\site-packages\starlette\testclient.py:53
+  <fresh-workspace>\.venv\Lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+17 passed, 1 skipped, 2 warnings in 1.28s
+PASS: 8 real MCP stdio calls; evidence: validation/automated

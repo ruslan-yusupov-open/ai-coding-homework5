@@ -1,0 +1,2 @@
+{"sdk": "mcp 1.30.0", "https_verified": true, "tools": ["list_docs", "search_docs", "get_doc"], "result": {"status": "success", "call_id": "f3770961-a4bb-4fac-ad4f-10222ba33453", "data": {"documents": [{"path": "overview.md", "title": "Local Docs MCP", "lines": 16}, {"path": "security.md", "title": "Безопасность", "lines": 20}, {"path": "troubleshooting.md", "title": "Отладка подключения", "lines": 20}], "count": 3}, "error": null}}
+{"unauthenticated_burst_status_counts": {"401": 5, "429": 15}}
